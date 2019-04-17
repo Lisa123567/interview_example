@@ -455,9 +455,6 @@ class Test_Clients(TestBase):
         users = udb.get_users(groups[0])
         directory = 'group_1'
         path = "{0}{1}{2}".format(mounts[0].path,"/",directory)
-
-        print "kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
-
         ctx.clients[0].execute(['mkdir', '-p',path], user=users[0])
         ctx.clients[0].chmod(path, 0666)
         fname = path + '/write_from_first_user_read_from_secound'
@@ -478,7 +475,7 @@ class Test_Clients(TestBase):
         #fds = dispatcher_tuple((fd0,) + fds)
         self._logger.info("BEFORE WRITE")
         ctx.clients[0].write_file(fd0, 0, 32, 2)
-#         self._logger.info("BEFORE CLOSE")
+        #self._logger.info("BEFORE CLOSE")
         ctx.clients[1].read_file(fd1, 0, 32, 2)
         ctx.clients[0].close_file(fd0)
         ctx.clients[1].close_file(fd1)
@@ -833,7 +830,7 @@ class Test_Clients(TestBase):
         fd1 = ctx.clients[1].open_file(fname2, os.O_CREAT | os.O_RDONLY | os.O_ASYNC, 0777, users2[0])
         fv = self._read_loop(ctx.clients[1], fd1, 0, 32, 4, users2[0], block=False)
 
-#        3- user from secound group write to each directory
+#  3- user from secound group write to each directory
         path3 = "{}/{}".format(self.mounts[2].path,directory)
         print "path3", path3
         print "user2[1] = ", users2[1]
