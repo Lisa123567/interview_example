@@ -1,4 +1,4 @@
-#__author__ = 'mleopold'
+#Not my code# example only
 
 from tonat.test_base import TestBase
 from tonat.libtests import attr
